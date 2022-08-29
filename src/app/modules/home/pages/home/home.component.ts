@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor() {}
+  constructor(private authService: AuthService) {}
+
+  ConsumirServicio() {
+    this.authService.getToken().subscribe({
+      next: value => {
+        console.log('next', value);
+      },
+      complete: () => {
+        console.log('complete');
+      },
+      error: err => {
+        console.log('error', err);
+      },
+    });
+  }
 }
